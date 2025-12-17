@@ -17,9 +17,10 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
 
-        // You are running the MAUI app on Windows Machine
-        // so localhost is correct:
-        var apiBaseAddress = "https://localhost:7033/";
+        // Use 10.0.2.2 for localhost on Android emulator
+        var apiBaseAddress = DeviceInfo.Platform == DevicePlatform.Android
+            ? "http://10.0.2.2:8080"
+            : "https://localhost:7033";
 
         // Services
         builder.Services.AddSingleton(sp => new HttpClient

@@ -18,8 +18,8 @@ public class AppDbContext : DbContext
 
         // Seed some initial data (optional, for testing)
         modelBuilder.Entity<Book>().HasData(
-            new Book { Id = 1, Title = "EF Core with MySQL", Author = "API Seed", Status = ReadingStatus.Reading },
-            new Book { Id = 2, Title = "Database Book", Author = "Server Seed", Status = ReadingStatus.ToRead }
+            new Book { Id = 1, Title = "Book One", Author = "John AppleSeed", Status = ReadingStatus.Reading },
+            new Book { Id = 2, Title = "Book Two", Author = "Server Seed", Status = ReadingStatus.ToRead }
         );
     }
 }
