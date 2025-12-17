@@ -1,0 +1,39 @@
+version: '3.9'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: booktracker-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: booktracker
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: rootpwd
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 2s
+      timeout: 2s
+      retries: 10
+
+  api:
+    build:
+      context: .
+      dockerfile: BookTracker.Api/Dockerfile
+    container_name: booktracker-api
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__DefaultConnection: server=db;port=3306;database=booktracker;user=user;password=password
+      ASPNETCORE_URLS: http://+:8080
+    ports:
+      - "8080:8080"
+
+volumes:
+  db_data:

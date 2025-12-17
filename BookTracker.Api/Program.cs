@@ -11,7 +11,7 @@ builder.Services.AddSwaggerGen();
 // Connection string for MySQL
 // TODO: adjust user/password/host/db as needed
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
-                      ?? "server=localhost;port=3306;database=booktracker;user=root;password=YourPasswordHere;";
+                      ?? "server=db;port=3306;database=booktracker;user=user;password=password;";
 
 // Register DbContext with MySQL provider
 builder.Services.AddDbContext<AppDbContext>(options =>
