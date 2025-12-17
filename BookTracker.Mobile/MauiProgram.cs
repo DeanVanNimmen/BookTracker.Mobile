@@ -17,8 +17,17 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
 
+        // You are running the MAUI app on Windows Machine
+        // so localhost is correct:
+        var apiBaseAddress = "https://localhost:7033/";
+
         // Services
-        builder.Services.AddSingleton<IBookService, MockBookService>();
+        builder.Services.AddSingleton(sp => new HttpClient
+        {
+            BaseAddress = new Uri(apiBaseAddress)
+        });
+
+        builder.Services.AddSingleton<IBookService, ApiBookService>();
 
         // ViewModels
         builder.Services.AddTransient<BooksViewModel>();

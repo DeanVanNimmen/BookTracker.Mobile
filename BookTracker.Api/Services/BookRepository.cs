@@ -15,7 +15,7 @@ public class InMemoryBookRepository : IBookRepository
 {
     private readonly List<BookDto> _books = new()
     {
-        new BookDto { Id = 1, Title = "The Pragmatic Programmer", Author = "Hunt & Thomas", Status = ReadingStatus.Reading },
+        new BookDto { Id = 1, Title = "The Pragmatic Programmer", Author = "Hunt & Deano", Status = ReadingStatus.Reading },
         new BookDto { Id = 2, Title = "Clean Code", Author = "Robert C. Martin", Status = ReadingStatus.ToRead },
         new BookDto { Id = 3, Title = "Atomic Habits", Author = "James Clear", Status = ReadingStatus.Finished, FinishedOn = DateTime.UtcNow.AddDays(-10) }
     };
