@@ -1,10 +1,11 @@
-﻿namespace BookTracker.Mobile
+﻿namespace BookTracker.Mobile;
+
+public partial class AppShell : Shell
 {
-    public partial class AppShell : Shell
+    public AppShell()
     {
-        public AppShell()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+
+        Routing.RegisterRoute(nameof(Views.BookDetailPage), typeof(Views.BookDetailPage));
     }
 }

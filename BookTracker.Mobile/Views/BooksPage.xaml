@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:BookTracker.Mobile.ViewModels"
+             xmlns:models="clr-namespace:BookTracker.Mobile.Models"
+             x:Class="BookTracker.Mobile.Views.BooksPage"
+             x:DataType="viewModels:BooksViewModel"
+             Title="My Books">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Command="{Binding AddBookCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <RefreshView Command="{Binding LoadBooksCommand}"
+                 IsRefreshing="{Binding IsBusy}">
+        <CollectionView ItemsSource="{Binding Books}"
+                        SelectionMode="Single"
+                        SelectionChanged="CollectionView_SelectionChanged">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Book">
+                    <Grid Padding="10" ColumnDefinitions="2*,2*,Auto">
+                        <Label Text="{Binding Title}" FontAttributes="Bold" Grid.Column="0" />
+                        <Label Text="{Binding Author}" Grid.Column="1" />
+                        <Label Text="{Binding Status}" Grid.Column="2" HorizontalTextAlignment="End" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </RefreshView>
+</ContentPage>
